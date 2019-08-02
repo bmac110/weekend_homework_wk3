@@ -23,6 +23,12 @@ class Customer
     SqlRunner.run(sql)
   end
 
+  def delete(id)
+    sql = "DELETE FROM customers WHERE id = $1"
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
+
   def update()
     sql = "UPDATE customers SET(name, funds) = ($1, $2) WHERE id = $3"
     values = [@name, @funds, @id]
