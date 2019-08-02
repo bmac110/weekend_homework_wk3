@@ -1,3 +1,6 @@
+require_relative("../db/sql_runner.rb")
+
+
 class Film
 
   attr_accessor :title, :price
@@ -39,5 +42,12 @@ class Film
     sql = "SELECT * FROM films"
     films = SqlRunner.run(sql)
     return films.map{|film| Film.new(film)}
+  end
+
+  def self.find_by_id(id)
+    sql = "SELECT * FROM films WHERE id = $1"
+    values = [id]
+    films = SqlRunner.run(sql, values).first()
+    return Film.new(films)
   end
 end
