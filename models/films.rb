@@ -50,4 +50,16 @@ class Film
     films = SqlRunner.run(sql, values).first()
     return Film.new(films)
   end
+
+  def customers()
+    sql = "SELECT customers.* FROM customers INNER JOIN tickets
+    ON customers.id = tickets.customer_id WHERE tickets.film_id = $1"
+    values = [@id]
+    customers = SqlRunner.run(sql, values)
+    result = customers.map{|customer| Customer.new(customer)}
+  end
+
+  def decrease_funds()
+
+  end
 end
