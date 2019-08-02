@@ -22,6 +22,9 @@ film1 = Film.new({
 
 film1.save()
 
+# film1.price = 20
+# film1.update()
+
 
 
 

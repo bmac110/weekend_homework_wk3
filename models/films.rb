@@ -1,5 +1,8 @@
 class Film
 
+  attr_accessor :title, :price
+  attr_reader :id
+
   def initialize(options)
     @id = options["id"].to_i if options["id"]
     @title = options["title"]
@@ -21,8 +24,14 @@ class Film
   end
 
   def update()
-    
+    sql = "UPDATE films SET(title, price) = ($1, $2) WHERE id = $3"
+    values = [@title, @price, @id]
+    SqlRunner.run(sql, values)
   end
 
-
+  def self.all()
+    sql = "SELECT * FROM films"
+    films = SqlRunner.run(sql)
+    return films.map{|film| Film.new(film)}
+  end
 end
