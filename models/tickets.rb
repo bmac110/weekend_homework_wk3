@@ -1,5 +1,7 @@
 require_relative("../db/sql_runner")
 
+attr_accessor :customer_id, :film_id
+attr_reader :id
 
 class Ticket
 
@@ -16,7 +18,7 @@ class Ticket
     @id = result["id"].to_i()
   end
 
-  def delete_all()
+  def self.delete_all()
     sql = "DELETE FROM tickets"
     SqlRunner.run(sql)
   end
@@ -47,6 +49,6 @@ class Ticket
     return Ticket.new(tickets)
   end
 
-  
+
 
 end

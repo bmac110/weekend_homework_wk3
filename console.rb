@@ -4,8 +4,10 @@ require_relative("./models/tickets.rb")
 
 require("pry-byebug")
 
+Ticket.delete_all()
 Film.delete_all()
 Customer.delete_all()
+
 
 
 customer1 = Customer.new({
@@ -26,8 +28,13 @@ ticket1 = Ticket.new({
   "customer_id" => customer1.id,
   "film_id" => film1.id
   })
+ticket2 = Ticket.new({
+  "customer_id" => customer1.id,
+  "film_id" => film1.id
+  })
 
 ticket1.save()
+ticket2.save()
 
 # film1.price = 20
 # film1.update()
