@@ -1,6 +1,7 @@
 require_relative("./models/customers.rb")
 require_relative("./models/films.rb")
 require_relative("./models/tickets.rb")
+require_relative("./models/screenings.rb")
 
 require("pry-byebug")
 
@@ -25,9 +26,11 @@ film1 = Film.new({
 film1.save()
 
 screening1 = Screening.new({
-  "showtime" => "17:00"
+  "showtime" => "17:00",
   "film_id" => film1.id
   })
+
+screening1.save()
 
 ticket1 = Ticket.new({
   "customer_id" => customer1.id,

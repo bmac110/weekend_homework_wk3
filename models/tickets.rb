@@ -1,7 +1,7 @@
 require_relative("../db/sql_runner")
 
-attr_accessor :customer_id, :film_id
-attr_reader :id
+# attr_accessor :customer_id, :film_id
+# attr_reader :id
 
 class Ticket
 
