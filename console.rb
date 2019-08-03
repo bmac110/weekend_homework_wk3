@@ -24,6 +24,11 @@ film1 = Film.new({
 
 film1.save()
 
+screening1 = Screening.new({
+  "showtime" => "17:00"
+  "film_id" => film1.id
+  })
+
 ticket1 = Ticket.new({
   "customer_id" => customer1.id,
   "film_id" => film1.id
