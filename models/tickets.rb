@@ -1,19 +1,21 @@
 require_relative("../db/sql_runner")
 
-# attr_accessor :customer_id, :film_id
-# attr_reader :id
 
 class Ticket
+
+  attr_accessor :customer_id, :film_id, :screening_id
+  attr_reader :id
 
   def initialize(options)
     @id = options["id"].to_i if options["id"]
     @customer_id = options["customer_id"].to_i()
     @film_id = options["film_id"].to_i()
+    @screening_id = options["screening_id"].to_i()
   end
 
   def save()
-    sql = "INSERT INTO tickets (customer_id, film_id) VALUES ($1, $2) RETURNING id"
-    values = [@customer_id, @film_id]
+    sql = "INSERT INTO tickets (customer_id, film_id, screening_id) VALUES ($1, $2, $3) RETURNING id"
+    values = [@customer_id, @film_id, @screening_id]
     result = SqlRunner.run(sql, values).first()
     @id = result["id"].to_i()
   end
@@ -25,14 +27,14 @@ class Ticket
 
   def delete(id)
     sql = "DELETE FROM tickets WHERE id = $1"
-    values = [id]
+    values = [@id]
     SqlRunner.run(sql, values)
   end
 
   def update()
-    sql = "UPDATE tickets SET (customer_id, film_id) = ($1, $2)
-    WHERE id = $3"
-    values = [@customer_id, @film_id, @id]
+    sql = "UPDATE tickets SET (customer_id, film_id, screening_id) = ($1, $2, $3)
+    WHERE id = $4"
+    values = [@customer_id, @film_id, @screening_id, @id]
     SqlRunner.run(sql, values)
   end
 

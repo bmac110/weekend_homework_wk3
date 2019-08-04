@@ -6,6 +6,7 @@ require_relative("./models/screenings.rb")
 require("pry-byebug")
 
 Ticket.delete_all()
+Screening.delete_all()
 Film.delete_all()
 Customer.delete_all()
 
@@ -23,26 +24,46 @@ film1 = Film.new({
   "price" => 12
   })
 
+film2 = Film.new({
+  "title" => "Ace Ventura",
+  "price" => 12
+  })
+
 film1.save()
+film2.save()
 
 screening1 = Screening.new({
-  "showtime" => "17:00",
-  "film_id" => film1.id
+  "showtime" => "2019-08-04 16:30:00"
+  })
+
+screening2 = Screening.new({
+  "showtime" => "2019-08-04 20:30:00"
   })
 
 screening1.save()
+screening2.save()
 
 ticket1 = Ticket.new({
   "customer_id" => customer1.id,
-  "film_id" => film1.id
+  "film_id" => film1.id,
+  "screening_id" => screening1.id
   })
+
 ticket2 = Ticket.new({
   "customer_id" => customer1.id,
-  "film_id" => film1.id
+  "film_id" => film1.id,
+  "screening_id" => screening2.id
+  })
+
+ticket3 = Ticket.new({
+  "customer_id" => customer1.id,
+  "film_id" => film2.id,
+  "screening_id" => screening2.id
   })
 
 ticket1.save()
 ticket2.save()
+ticket3.save()
 
 # film1.price = 20
 # film1.update()

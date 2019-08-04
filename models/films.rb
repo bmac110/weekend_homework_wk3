@@ -71,5 +71,19 @@ class Film
     return watching
   end
 
+  def screenings()
+    sql = "SELECT screenings.* FROM screenings INNER JOIN tickets
+    ON screenings.id = tickets.screening_id WHERE tickets.film_id = $1"
+    values = [@id]
+    screenings = SqlRunner.run(sql, values)
+    return screenings.map{|screening| Screening.new(screening)}
+  end
+
+  def popular_showtime()
+    screenings = screenings()
+    screening_times = screenings.map{|screening| screening.showtime}
+    return screening_times.max_by{|time| screening_times.count(time)}
+  end
+
 
 end
